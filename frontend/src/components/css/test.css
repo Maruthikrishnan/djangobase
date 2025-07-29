@@ -1,0 +1,15 @@
+.div1 {
+  background-color: aqua;
+  height: 100px;
+  position: sticky;
+  top: 0;
+}
+.div2 {
+  background-color: rgb(236, 72, 198);
+  height: 100px;
+}
+
+.div3 {
+  background-color: rgb(50, 212, 1);
+  height: 100%;
+}
