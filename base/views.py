@@ -4,12 +4,13 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import task
-from .serializer import TaskSerializer
+from .serializer import TaskSerializer, UserSerializer
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAdminUser,IsAuthenticated
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 
 
@@ -19,9 +20,27 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['username'] = self.user.username
         return data
 
-
 class GetToken(TokenObtainPairView):
     serializer_class =MyTokenObtainPairSerializer
+
+
+@api_view(['POST'])
+def createUser(request):
+    user = User.objects.filter(username=request.data['username'])
+    if user.exists():
+        user = authenticate(request, username=request.data['username'], password=request.data['password'])
+        if user is not None:
+            serializer =UserSerializer(user,many=False)
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        else:
+            return Response("none",status=status.HTTP_401_UNAUTHORIZED)
+        # serializer =UserSerializer(user[0],many=False)
+        # return Response(serializer.data,status=status.HTTP_200_OK)
+    else:
+        user = User.objects.create(username=request.data['username'],password = make_password(request.data['password']))
+        serializer =UserSerializer(user,many=False)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+  
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

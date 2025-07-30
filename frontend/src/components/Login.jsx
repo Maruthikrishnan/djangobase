@@ -6,8 +6,15 @@ import { useNavigate } from "react-router-dom";
 
 function App() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token") && localStorage.getItem("user")) {
+      navigate("/home");
+      return;
+    }
+  });
+
   const onFinish = (values) => {
-    localStorage.setItem("issave", values.remember);
     if (values.remember) {
       localStorage.setItem("username", values.username);
       localStorage.setItem("password", values.password);
@@ -20,14 +27,16 @@ function App() {
         "Content-Type": "application/json",
       },
     };
-    Axios.post("http://127.0.0.1:8000/api/login/", values, config).then(
-      (response) => {
+    Axios.post("http://127.0.0.1:8000/api/createuser/", values, config)
+      .then((response) => {
         localStorage.setItem("token", response.data.access);
         localStorage.setItem("user", response.data.username);
         message.success("Login success!");
         navigate("/home");
-      }
-    );
+      })
+      .catch((e) => {
+        message.success("Wrong password!");
+      });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
