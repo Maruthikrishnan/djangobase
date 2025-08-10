@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-uc9zn1ay*ux+uklg30q3y@$be(u=$+0qh2b&l@j=10ik3ce%-!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -191,5 +191,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOW_ALL_ORIGINS= True
+# CORS_ALLOW_ALL_ORIGINS= True
 # CORS_ALLOWED_ORIGINS=['http://localhost:5173']
+SESSION_COOKIE_SECURE=False

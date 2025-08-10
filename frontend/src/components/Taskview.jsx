@@ -18,13 +18,12 @@ export default function Taskview({ task, refereshTask }) {
       },
     };
 
-    Axios.delete(
-      `http://127.0.0.1:8000/api/removetask/${task.id}`,
-      config
-    ).then((response) => {
-      message.success(response.data);
-      refereshTask();
-    });
+    Axios.delete(`http://52.23.131.220/api/removetask/${task.id}`, config).then(
+      (response) => {
+        message.success(response.data);
+        refereshTask();
+      }
+    );
 
     e.stopPropagation();
   };

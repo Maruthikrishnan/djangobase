@@ -27,7 +27,8 @@ function App() {
         "Content-Type": "application/json",
       },
     };
-    Axios.post("http://127.0.0.1:8000/api/createuser/", values, config)
+
+    Axios.post("http://52.23.131.220/api/createuser/", values, config)
       .then((response) => {
         localStorage.setItem("token", response.data.access);
         localStorage.setItem("user", response.data.username);

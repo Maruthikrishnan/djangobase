@@ -35,7 +35,7 @@ export default function Updatetaskmodel({
       },
     };
     Axios.put(
-      `http://127.0.0.1:8000/api/updatetask/${task.id}`,
+      `http://52.23.131.220/api/updatetask/${task.id}`,
       values,
       config
     ).then((response) => {

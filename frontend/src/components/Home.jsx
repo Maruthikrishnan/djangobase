@@ -34,7 +34,7 @@ function Home() {
       },
     };
 
-    Axios.get("http://127.0.0.1:8000/api/task/", config).then((response) => {
+    Axios.get("http://52.23.131.220/api/task/", config).then((response) => {
       setTask(response.data);
     });
   }, [refreshTrigger]);

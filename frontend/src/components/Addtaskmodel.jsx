@@ -35,7 +35,7 @@ export default function Addtaskmodel({
         "Content-Type": "application/json",
       },
     };
-    Axios.post("http://127.0.0.1:8000/api/addtask/", values, config).then(
+    Axios.post("http://52.23.131.220/api/addtask/", values, config).then(
       (response) => {
         message.success(response.data);
       }
